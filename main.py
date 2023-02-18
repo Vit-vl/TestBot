@@ -3,7 +3,7 @@ import time
 import settings
 
 API_URL: str = 'https://api.telegram.org/bot'
-TEXT: str = 'Ура! Передавай привет Ульке!'
+TEXT: str = 'Ура! Работает!'
 MAX_COUNTER: int = 30
 
 offset: int = -2
