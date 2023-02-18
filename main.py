@@ -22,8 +22,10 @@ while counter < MAX_COUNTER:
             offset = result['update_id']
             chat_id = result['message']['from']['id']
             cat_response = requests.get(API_FOX)
+            name = result['message']['from']['first_name']
             if cat_response.status_code == 200:
                 fox_link = cat_response.json()['image']
+                requests.get(f'{API_URL}{token}/sendMessage?chat_id={chat_id}&text={name}, вот тебе картинка: ')
                 requests.get(f'{API_URL}{token}/sendPhoto?chat_id={chat_id}&photo={fox_link}')
             else:
                 requests.get(f'{API_URL}{token}/sendMessage?chat_id={chat_id}&text={TEXT}')
