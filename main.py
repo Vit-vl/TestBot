@@ -1,6 +1,6 @@
 import requests  # type: ignore
 import time
-from settings import token
+from settings import bot_token
 
 API_URL: str = 'https://api.telegram.org/bot'
 TEXT: str = 'Здесь должна была быть картинка с котиком :('
@@ -15,7 +15,7 @@ fox_link: str
 
 while counter < MAX_COUNTER:
     print('attempt =', counter)
-    updates = requests.get(f'{API_URL}{token}/getUpdates?offset={offset + 1}').json()
+    updates = requests.get(f'{API_URL}{bot_token}/getUpdates?offset={offset + 1}').json()
 
     if updates['result']:
         for result in updates['result']:
@@ -25,9 +25,9 @@ while counter < MAX_COUNTER:
             name = result['message']['from']['first_name']
             if cat_response.status_code == 200:
                 fox_link = cat_response.json()['image']
-                requests.get(f'{API_URL}{token}/sendMessage?chat_id={chat_id}&text={name}, вот тебе картинка: ')
-                requests.get(f'{API_URL}{token}/sendPhoto?chat_id={chat_id}&photo={fox_link}')
+                requests.get(f'{API_URL}{bot_token}/sendMessage?chat_id={chat_id}&text={name}, вот тебе картинка: ')
+                requests.get(f'{API_URL}{bot_token}/sendPhoto?chat_id={chat_id}&photo={fox_link}')
             else:
-                requests.get(f'{API_URL}{token}/sendMessage?chat_id={chat_id}&text={TEXT}')
+                requests.get(f'{API_URL}{bot_token}/sendMessage?chat_id={chat_id}&text={TEXT}')
     time.sleep(1)
     counter += 1
